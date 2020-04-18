@@ -6,7 +6,7 @@ export default class SoftDeleteQueryBuilder<M extends Model, R = M[]> extends Qu
   constructor(modelClass) {
     super(modelClass);
 
-    this.onBuild((builder) => {
+    this.onBuild(builder => {
       const ctx = builder.context();
 
       if (!ctx.includeDeleted) {

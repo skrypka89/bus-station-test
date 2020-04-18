@@ -2,8 +2,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
-    'plugin:prettier/recommended',
+    'plugin:jest/recommended'
   ],
   plugins: ['@typescript-eslint', 'jest'],
   parser: '@typescript-eslint/parser',
@@ -55,6 +54,9 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
     'no-param-reassign': ['error', { props: false }],
+    'arrow-parens': ['error', 'as-needed'],
+    'operator-linebreak': ['error', 'after'],
+    'no-console': 'off'
   },
   overrides: [
     {

@@ -73,7 +73,7 @@ export default abstract class BaseModel extends Model {
     const { restrictedKeys } = this.constructor as typeof BaseModel;
 
     if (restrictedKeys) {
-      restrictedKeys.forEach((k) => {
+      restrictedKeys.forEach(k => {
         // eslint-disable-next-line no-param-reassign
         delete json[k];
       });

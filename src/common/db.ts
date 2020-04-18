@@ -11,7 +11,7 @@ const db = knex({
   ...knexSnakeCaseMappers(),
 });
 
-db.on('query', (query) => {
+db.on('query', query => {
   queries[query.__knexQueryUid] = {
     start: performance.now(),
     sql: db.raw(query.sql, query.bindings).toString(),

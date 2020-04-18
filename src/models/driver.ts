@@ -2,6 +2,13 @@ import joi from '@hapi/joi';
 import BaseModel from './base';
 
 export default class Driver extends BaseModel {
+  id: number;
+  name: string;
+  licenceId: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  deletedAt: Date | null;
+
   static tableName = 'drivers';
 
   static timestamps = true;
