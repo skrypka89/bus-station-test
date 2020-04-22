@@ -56,7 +56,8 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     'arrow-parens': ['error', 'as-needed'],
     'operator-linebreak': ['error', 'after'],
-    'no-console': 'off'
+    'no-console': 'off',
+    'comma-dangle': ['error', 'only-multiline']
   },
   overrides: [
     {
