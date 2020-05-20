@@ -1,5 +1,6 @@
 import Driver from '../models/driver';
 import { DriverDto } from './dto/driver-dto';
+import ApiError from '../common/api-error';
 
 export default class DriverService {
   private model: typeof Driver = Driver;
@@ -21,6 +22,7 @@ export default class DriverService {
   }
 
   async delete(id: number): Promise<void> {
-    await this.model.query().deleteById(id);
+    const deleted = await this.model.query().deleteById(id);
+    if (!deleted) throw ApiError.notFound('id не найден');
   }
 }

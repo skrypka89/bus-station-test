@@ -1,5 +1,5 @@
 import express from 'express';
-import driverController from './driver.controller';
+import driverController from './driver-controller';
 
 const router = express.Router();
 
