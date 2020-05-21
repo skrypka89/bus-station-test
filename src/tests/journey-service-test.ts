@@ -73,6 +73,6 @@ try {
     await journeyService.delete(journey2.id);
     console.log(await journeyService.getAll());
   })();
-} catch (error) {
-  console.log(error.name + ': ' + error.message);
+} catch (e) {
+  console.error(e);
 }
