@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { DriverDto } from '../services/dto/driver-dto';
 
-const driverData1: DriverDto = {
+const driverData1 = {
   name: 'Serhii Petrenko',
   licenceId: 'BXX161565'
 };
-const driverData2: DriverDto = {
+const driverData2 = {
   name: 'Ivan Polishchuk',
   licenceId: 'BXT046142'
 };
