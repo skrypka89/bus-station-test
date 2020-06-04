@@ -8,7 +8,14 @@ export default class JourneyService {
     return this.model.query().insert(dto).returning('*');
   }
 
-  async getAll(): Promise<Journey[]> {
+  async getAll(limit?: number, page?: number): Promise<Journey[]> {
+    if (typeof limit === 'number') {
+      if (limit < 0) return this.model.query();
+      if (typeof page !== 'number' || page <= 0) return this.model.query().limit(limit);
+
+      return this.model.query().limit(limit).offset(limit * (page - 1));
+    }
+
     return this.model.query();
   }
 
