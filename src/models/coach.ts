@@ -19,7 +19,7 @@ export default class Coach extends BaseModel {
     brand: joi.string().max(255),
     model: joi.string().max(255),
     govNumber: joi.string().max(255),
-    seats: joi.number().max(32767)
+    seats: joi.number().max(200)
   });
 
   static fullSchema = Coach.patchSchema.requiredKeys(

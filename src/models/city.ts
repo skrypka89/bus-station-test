@@ -13,7 +13,7 @@ export default class City extends BaseModel {
   static timestamps = true;
 
   static patchSchema = joi.object({
-    name: joi.string().max(255),
+    name: joi.string().max(255)
   });
 
   static fullSchema = City.patchSchema.requiredKeys('name');

@@ -1,22 +1,22 @@
 import joi from '@hapi/joi';
 import BaseModel from './base';
 
-export default class Driver extends BaseModel {
+export default class User extends BaseModel {
   id: number;
   name: string;
-  licenceId: string;
+  age: number;
   createdAt: Date | null;
   updatedAt: Date | null;
   deletedAt: Date | null;
 
-  static tableName = 'drivers';
+  static tableName = 'users';
 
   static timestamps = true;
 
   static patchSchema = joi.object({
     name: joi.string().max(255),
-    licenceId: joi.string().max(255)
+    age: joi.number().max(130)
   });
 
-  static fullSchema = Driver.patchSchema.requiredKeys('name', 'licenceId');
+  static fullSchema = User.patchSchema.requiredKeys('name', 'age');
 }
