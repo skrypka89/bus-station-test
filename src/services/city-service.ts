@@ -1,5 +1,6 @@
 import City from '../models/city';
 import { CityDto } from './dto/city-dto';
+import ApiError from '../common/api-error';
 
 export default class CityService {
   private model: typeof City = City;
@@ -8,7 +9,15 @@ export default class CityService {
     return this.model.query().insert(dto).returning('*');
   }
 
-  async getAll(): Promise<City[]> {
+  async getAll(limit?: number, page?: number): Promise<City[]> {
+    if (typeof limit === 'number' && !Number.isNaN(limit)) {
+      if (typeof page === 'number' && !Number.isNaN(page)) {
+        return this.model.query().limit(limit).offset(limit * (page - 1));
+      }
+
+      return this.model.query().limit(limit);
+    }
+
     return this.model.query();
   }
 
@@ -21,6 +30,7 @@ export default class CityService {
   }
 
   async delete(id: number): Promise<void> {
-    await this.model.query().deleteById(id);
+    const deleted = await this.model.query().deleteById(id);
+    if (!deleted) throw ApiError.notFound('id не найден');
   }
 }

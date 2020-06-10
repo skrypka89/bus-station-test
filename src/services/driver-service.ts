@@ -9,7 +9,15 @@ export default class DriverService {
     return this.model.query().insert(dto).returning('*');
   }
 
-  async getAll(): Promise<Driver[]> {
+  async getAll(limit?: number, page?: number): Promise<Driver[]> {
+    if (typeof limit === 'number' && !Number.isNaN(limit)) {
+      if (typeof page === 'number' && !Number.isNaN(page)) {
+        return this.model.query().limit(limit).offset(limit * (page - 1));
+      }
+
+      return this.model.query().limit(limit);
+    }
+
     return this.model.query();
   }
 

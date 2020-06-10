@@ -24,10 +24,10 @@ export default class Journey extends BaseModel {
   static patchSchema = joi.object({
     departure: joi.date().timestamp(),
     arrival: joi.date().timestamp(),
-    fromId: joi.number(),
-    toId: joi.number(),
-    coachId: joi.number(),
-    driverId: joi.number()
+    fromId: joi.number().integer().positive(),
+    toId: joi.number().integer().positive(),
+    coachId: joi.number().integer().positive(),
+    driverId: joi.number().integer().positive()
   });
 
   static fullSchema = Journey.patchSchema.requiredKeys(

@@ -15,7 +15,7 @@ export default class User extends BaseModel {
 
   static patchSchema = joi.object({
     name: joi.string().max(255),
-    age: joi.number().max(130)
+    age: joi.number().integer().positive()
   });
 
   static fullSchema = User.patchSchema.requiredKeys('name', 'age');

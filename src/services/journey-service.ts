@@ -1,5 +1,6 @@
 import Journey from '../models/journey';
 import { JourneyDto } from './dto/journey-dto';
+import ApiError from '../common/api-error';
 
 export default class JourneyService {
   private model: typeof Journey = Journey;
@@ -9,11 +10,12 @@ export default class JourneyService {
   }
 
   async getAll(limit?: number, page?: number): Promise<Journey[]> {
-    if (typeof limit === 'number') {
-      if (limit < 0) return this.model.query();
-      if (typeof page !== 'number' || page <= 0) return this.model.query().limit(limit);
+    if (typeof limit === 'number' && !Number.isNaN(limit)) {
+      if (typeof page === 'number' && !Number.isNaN(page)) {
+        return this.model.query().limit(limit).offset(limit * (page - 1));
+      }
 
-      return this.model.query().limit(limit).offset(limit * (page - 1));
+      return this.model.query().limit(limit);
     }
 
     return this.model.query();
@@ -28,6 +30,7 @@ export default class JourneyService {
   }
 
   async delete(id: number): Promise<void> {
-    await this.model.query().deleteById(id);
+    const deleted = await this.model.query().deleteById(id);
+    if (!deleted) throw ApiError.notFound('id не найден');
   }
 }

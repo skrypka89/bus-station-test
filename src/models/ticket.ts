@@ -19,10 +19,10 @@ export default class Ticket extends BaseModel {
   static timestamps = true;
 
   static patchSchema = joi.object({
-    seat: joi.number().max(200),
+    seat: joi.number().integer().positive(),
     type: joi.string().max(255),
-    userId: joi.number(),
-    journeyId: joi.number()
+    userId: joi.number().integer().positive(),
+    journeyId: joi.number().integer().positive()
   });
 
   static fullSchema = Ticket.patchSchema.requiredKeys(
