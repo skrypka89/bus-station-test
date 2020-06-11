@@ -2,7 +2,6 @@ exports.up = knex => knex.raw(`
   CREATE TABLE admins (
     id serial PRIMARY KEY,
     name varchar(255) NOT NULL,
-    access varchar(255) NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     deleted_at timestamp
