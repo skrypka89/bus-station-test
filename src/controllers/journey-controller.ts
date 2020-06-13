@@ -2,14 +2,15 @@ import express from 'express';
 import joi from '@hapi/joi';
 import JourneyService from '../services/journey-service';
 import validate from '../common/middlewares/validate';
+import regex from '../common/regex';
 
 const router = express.Router();
 const journeyService = new JourneyService();
 
 router.post('/',
   validate(joi.object({
-    departure: joi.date().timestamp().required(),
-    arrival: joi.date().timestamp().required(),
+    departure: joi.string().regex(regex).required(),
+    arrival: joi.string().regex(regex).required(),
     fromId: joi.number().integer().positive().required(),
     toId: joi.number().integer().positive().required(),
     coachId: joi.number().integer().positive().required(),
@@ -50,8 +51,8 @@ router.get('/:id',
 
 router.patch('/:id',
   validate(joi.object({
-    departure: joi.date().timestamp(),
-    arrival: joi.date().timestamp(),
+    departure: joi.string().regex(regex),
+    arrival: joi.string().regex(regex),
     fromId: joi.number().integer().positive(),
     toId: joi.number().integer().positive(),
     coachId: joi.number().integer().positive(),

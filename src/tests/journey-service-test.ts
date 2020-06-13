@@ -44,16 +44,16 @@ try {
     const city2 = await cityService.create(cityData2);
     const city3 = await cityService.create(cityData3);
     const journeyData1: JourneyDto = {
-      departure: new Date('2020-04-28T16:30:00'),
-      arrival: new Date('2020-04-28T18:15:00'),
+      departure: '2020-04-28 16:30:00',
+      arrival: '2020-04-28 18:15:00',
       fromId: city1.id,
       toId: city2.id,
       coachId: coach.id,
       driverId: driver.id
     };
     const journeyData2: JourneyDto = {
-      departure: new Date('2020-04-29T18:45:00'),
-      arrival: new Date('2020-04-29T20:15:00'),
+      departure: '2020-04-29 18:45:00',
+      arrival: '2020-04-29 20:15:00',
       fromId: city3.id,
       toId: city1.id,
       coachId: coach.id,
@@ -66,8 +66,8 @@ try {
     const journey1 = await journeyService.create(journeyData1);
 
     console.log(await journeyService.getAll());
-    journeyData1.departure = new Date('2020-04-28T16:00:00');
-    journeyData1.arrival = new Date('2020-04-28T17:45:00');
+    journeyData1.departure = '2020-04-28 16:00:00';
+    journeyData1.arrival = '2020-04-28 17:45:00';
     await journeyService.update(journey1.id, journeyData1);
     console.log(await journeyService.getById(journey1.id));
     await journeyService.delete(journey2.id);

@@ -1,6 +1,6 @@
 export type JourneyDto = {
-  departure?: Date;
-  arrival?: Date;
+  departure?: string;
+  arrival?: string;
   fromId?: number;
   toId?: number;
   coachId?: number;

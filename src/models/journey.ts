@@ -4,11 +4,12 @@ import BaseModel from './base/index';
 import City from './city';
 import Coach from './coach';
 import Driver from './driver';
+import regex from '../common/regex';
 
 export default class Journey extends BaseModel {
   id: number;
-  departure: Date;
-  arrival: Date;
+  departure: string;
+  arrival: string;
   fromId: number;
   toId: number;
   coachId: number;
@@ -22,8 +23,8 @@ export default class Journey extends BaseModel {
   static timestamps = true;
 
   static patchSchema = joi.object({
-    departure: joi.date().timestamp(),
-    arrival: joi.date().timestamp(),
+    departure: joi.string().regex(regex),
+    arrival: joi.string().regex(regex),
     fromId: joi.number().integer().positive(),
     toId: joi.number().integer().positive(),
     coachId: joi.number().integer().positive(),
