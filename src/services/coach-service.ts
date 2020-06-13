@@ -9,16 +9,16 @@ export default class CoachService {
     return this.model.query().insert(dto).returning('*');
   }
 
-  async getAll(limit?: number, page?: number): Promise<Coach[]> {
-    if (typeof limit === 'number' && !Number.isNaN(limit)) {
-      if (typeof page === 'number' && !Number.isNaN(page)) {
-        return this.model.query().limit(limit).offset(limit * (page - 1));
-      }
-
-      return this.model.query().limit(limit);
+  async getAll(query?: {limit?: number; page?: number}): Promise<Coach[]> {
+    if (!query || typeof query.limit !== 'number') {
+      return this.model.query();
     }
 
-    return this.model.query();
+    if (typeof query.page !== 'number') {
+      return this.model.query().limit(query.limit);
+    }
+
+    return this.model.query().limit(query.limit).offset(query.limit * (query.page - 1));
   }
 
   async getById(id: number): Promise<Coach> {

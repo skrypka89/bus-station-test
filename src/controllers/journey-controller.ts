@@ -27,12 +27,16 @@ router.post('/',
 
 router.get('/',
   validate(joi.object({
+    departure: joi.string().regex(regex),
+    arrival: joi.string().regex(regex),
+    fromId: joi.number().integer().positive(),
+    toId: joi.number().integer().positive(),
     limit: joi.number().integer().greater(-1),
     page: joi.number().integer().positive()
   })),
   async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-      const journeys = await journeyService.getAll(+req.query.limit, +req.query.page);
+      const journeys = await journeyService.getAll(req.query);
       res.json(journeys);
     } catch (e) {
       next(e);

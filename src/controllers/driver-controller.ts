@@ -27,7 +27,7 @@ router.get('/',
   })),
   async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-      const drivers = await driverService.getAll(+req.query.limit, +req.query.page);
+      const drivers = await driverService.getAll(req.query);
       res.json(drivers);
     } catch (e) {
       next(e);

@@ -9,16 +9,32 @@ export default class JourneyService {
     return this.model.query().insert(dto).returning('*');
   }
 
-  async getAll(limit?: number, page?: number): Promise<Journey[]> {
-    if (typeof limit === 'number' && !Number.isNaN(limit)) {
-      if (typeof page === 'number' && !Number.isNaN(page)) {
-        return this.model.query().limit(limit).offset(limit * (page - 1));
-      }
+  async getAll(
+    query?: {
+      departure?: string;
+      arrival?: string;
+      fromId?: number;
+      toId?: number;
+      limit?: number;
+      page?: number;
+    }
+  ): Promise<Journey[]> {
+    const qb = this.model.query();
+    const keys = ['departure', 'arrival', 'fromId', 'toId'];
 
-      return this.model.query().limit(limit);
+    if (!query) return qb;
+
+    keys.forEach(key => {
+      if (query[key]) qb.where(key, query[key]);
+    });
+
+    if (query.limit && query.page) {
+      qb.limit(query.limit).offset(query.limit * (query.page - 1));
+    } else if (query.limit) {
+      qb.limit(query.limit);
     }
 
-    return this.model.query();
+    return qb;
   }
 
   async getById(id: number): Promise<Journey> {
