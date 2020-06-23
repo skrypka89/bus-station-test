@@ -47,6 +47,7 @@ export default class JourneyService {
 
   async delete(id: number): Promise<void> {
     const deleted = await this.model.query().deleteById(id);
+
     if (!deleted) throw ApiError.notFound('id не найден');
   }
 }

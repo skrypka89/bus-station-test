@@ -3,7 +3,8 @@ import BaseModel from './base';
 
 export default class User extends BaseModel {
   id: number;
-  name: string;
+  username: string;
+  password: string;
   age: number;
   createdAt: Date | null;
   updatedAt: Date | null;
@@ -14,9 +15,12 @@ export default class User extends BaseModel {
   static timestamps = true;
 
   static patchSchema = joi.object({
-    name: joi.string().max(255),
+    username: joi.string(),
+    password: joi.string(),
     age: joi.number().integer().positive()
   });
 
-  static fullSchema = User.patchSchema.requiredKeys('name', 'age');
+  static fullSchema = User.patchSchema.requiredKeys(
+    'username', 'password', 'age'
+  );
 }
